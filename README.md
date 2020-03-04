@@ -49,12 +49,14 @@ This script was written to automatically generate base cpp class files with opti
 ## 3. Menu Class ##
 Menu Class for python scripts to create simple CLI Menu Systems:
 #### Syntax: ####
-``` mainMenu = Menu(["newFile", "Options", "Quit"],[func1, func2, func3])
+``` 
+mainMenu = Menu(["newFile", "Options", "Quit"],[func1, func2, func3])
 ```
 Each option is mapped to the function in the same position in the function array. The menu can contain as many options as desired. The option is selected by entering the coressponding number
 
 #### Output: ####
-'''1. newFile
+```
+1. newFile
 2. Options
 3. Quit
 ```
