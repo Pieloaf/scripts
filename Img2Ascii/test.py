@@ -15,8 +15,11 @@ imgpath = input("Enter Path to Image: ")
 #Reading in image as grayscale
 img = cv2.imread(imgpath,0)
 
-#array of 64 ascii chars in order of density
+#array of 64 ascii chars in order of density; scaler = 0.25
 chars = ['$','@','B','%','8','&','W','M','#','*','o','a','h','k','b','d','p','q','w','m','Z','O','0','Q','L','C','J','U','Y','X','z','c','v','u','n','x','r','j','f','t','/','|','(','1','{','[','?,','-','_','+','~','<','i','!','l','I',';',':',',','\"','^','`','.',' ']
+
+#array of 4 ascii chars in order of density; scaler = 0.015625
+#chars = ['▓','▒','░',' ']
 
 #print and get image width and height
 print(img.shape)
