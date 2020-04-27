@@ -61,3 +61,6 @@ Each option is mapped to the function in the same position in the function array
 2. Options
 3. Quit
 ```
+## 4. Stream Count Down and Loading Bar ##
+Python script that takes an input number of mins and counts down until done. A progress bar also fills up until timer is done. Finally the text "Starting Soon..." has the dots increment to 3 and reset, one dot every second. Each of these are written to a text file and updated once a second that OBS can then read from and display on screen:
+![](images/countdown.gif)
