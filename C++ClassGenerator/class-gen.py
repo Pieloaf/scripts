@@ -27,14 +27,12 @@ def projectDir():
     return
 
 #main menu
-def mainM():
+def initMainMenu():
     global main
-    
     main = Menu(["Add Class","Quit"], [newClass, quit])
-    
-    print(main)
-    x = input()
-    main.choice(x)
+
+def mainM():    
+    main.choice(input(main))
     return
 
 #new class
@@ -175,5 +173,5 @@ def setget():
         setrgetr.append( dtype+" get"+dname+"(){ return "+dname+"; }")
         
 projectDir()
-
+initMainMenu()
 mainM()

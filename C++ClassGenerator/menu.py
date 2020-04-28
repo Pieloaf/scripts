@@ -5,10 +5,7 @@ class Menu:
         self.func = func
 
     def __repr__(self):
-        options_list = '\n'.join(str(self.options.index(option)+1) + '. ' + option for option in self.options)
-        return options_list
+        return ''.join(str(self.options.index(opt)+1) + '. ' + opt + '\n' for opt in self.options)
     
     def choice(self, chosen):
-        x = int(chosen)
-        why = self.func[(x-1)]
-        why()
+        self.func[(int(chosen)-1)]()
