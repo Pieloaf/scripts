@@ -69,5 +69,5 @@ Each option is mapped to the function in the same position in the function array
 Python script that takes an input number of mins and counts down until done. A progress bar also fills up until timer is done. Finally the text "Starting Soon..." has the dots increment to 3 and reset, one dot every second. Each of these are written to a text file and updated once a second that OBS can then read from and display on screen:
 ![](images/countdown.gif)
 
-## 5. Directory Divider ## 
-*Still WIP* I had music I wanted to burn to a disc it was 1GB but the CD only held 700MB rather than having one full disc and one nearly blank disc, I wrote the script to divide the folder in half, into a disc one and disc two folder. I could burn each folder to two seperate discs and have each disc approx. the same length. Once I finish my exams I hope to make it more usable in other situations.
+## 5. Directory Divider **Still WIP, don't use!** ## 
+I had music I wanted to burn to a disc it was 1GB but the CD only held 700MB rather than having one full disc and one nearly blank disc, I wrote the script to divide the folder in half, into a disc one and disc two folder. I could burn each folder to two seperate discs and have each disc approx. the same length. Once I finish my exams I hope to make it more usable in other situations.
