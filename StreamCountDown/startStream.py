@@ -1,9 +1,13 @@
-from time import sleep
 from multiprocessing import Process
+from time import sleep
 import sys
+import toml
+from menu import Menu
+import config
+from os import path
 
-def write(msg, filen):
-	file = filen+'.txt'
+def write(msg, file):
+	file = file+'.txt'
 	ofile = open(file, 'w', encoding='utf-8')
 	ofile.write(msg)
 	ofile.close()
@@ -29,7 +33,7 @@ def timer(m):
             write(i, 'time')
             sleep(1)
     
-def startSoon(text, file):
+def dotText(text, file):
     while True:
         sleep(1)
         msg = text
@@ -62,23 +66,14 @@ def percentage(m):
         per_comp += 1
         write(str(round(per_comp)).zfill(2)+'%', "percentage")
 
-    per_comp = 100    
+    per_comp = 100
 
 if __name__ == '__main__':
-
-    #taking neccessary user input
-    mins = int(input("mins: "))
-    numText = int(input("number of on screen text items:"))
-    text = []
-    textProc = []
-    for i in range(numText):
-        text.append (input("Text "+str(i)+": "))
-        textProc.append(Process(target=startSoon, args=(text[i], 'text'+str(i))))
-    loading_len = int(input(("Length of Loading Bar: ")))
-
-    #starting functions
-    for i in range(numText):
-        textProc[i].start()  
-    Process(target = timer, args=(mins,)).start()
-    Process(target = loading, args=(mins,loading_len,)).start()
-    Process(target= percentage, args=(mins,)).start()
+    #if path,isf'default.config'
+    #    os.path.r
+    #except NotA
+    config.newConfig()
+    print("--===-=-=-=-=-==-")
+    procs = config.loadConfig('123')
+    for proc in procs:
+        proc.start()
