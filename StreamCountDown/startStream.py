@@ -92,7 +92,7 @@ def main():
 
     argv = sys.argv[1:]
     try:
-        opts, args = getopt.getopt(argv, 'd:c:hn',['default','config','help','new'])
+        opts, args = getopt.getopt(argv, 'd:c:hn',['default=','config=','help','new'])
     except getopt.GetoptError:
         print(usage)
         return
@@ -103,8 +103,7 @@ def main():
         print(usage)
     else:
         for opt, arg in opts:
-            
-            if opt in ['-d','--default']:
+            if opt in ("-d","--default"):
                 if path.isfile(path.join(getcwd(),arg)):
                     config.setDefault(arg[:-5])
                     return
@@ -130,6 +129,8 @@ def main():
             elif opt in ['-n','--new']:
                 config.newConfig()
                 return
+            else:
+                print('nope')
 
 if __name__ == '__main__':
     main()
