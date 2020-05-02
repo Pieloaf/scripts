@@ -1,10 +1,12 @@
 from multiprocessing import Process
 from time import sleep
+from os import path, getcwd, remove, stat, listdir
+from pathlib import Path
+import getopt
 import sys
-import toml
+
 from menu import Menu
 import config
-from os import path
 
 def write(msg, file):
 	file = file+'.txt'
@@ -68,12 +70,66 @@ def percentage(m):
 
     per_comp = 100
 
+def noArgs():
+    cwd = getcwd()
+    if (not path.isfile(path.join(cwd,'default.config'))) or (stat('default.config').st_size == 0):
+        config.invalidDefault(cwd)
+    else:
+        defaultConfig = open('default.config', 'r')
+        confName = defaultConfig.readlines()[0]
+        defaultConfig.close()
+        if not path.isfile(path.join(cwd,(confName+'.toml'))):
+            print('File not found')
+            config.invalidDefault(cwd)
+        else:
+            procs = config.loadConfig(confName)
+            for proc in procs:
+                proc.start()
+
+def main():
+    usage = '==Usage==\npython startStream.py [OPTION...] [FILE...]\n\nNo arguments \t\t\tUses default config file\n-d --default\t<fName.toml>\tSets fName.toml as default config\n-c --config\t<fName.toml>\tUses fName.toml as config\n-n --new\t\t\tCreates new config file\n-h --help\t\t\tDisplays this help message'
+    fileNotFound = 'Error: File Not Found'
+
+    argv = sys.argv[1:]
+    try:
+        opts, args = getopt.getopt(argv, 'd:c:hn',['default','config','help','new'])
+    except getopt.GetoptError:
+        print(usage)
+        return
+
+    if len(argv) == 0:
+        noArgs()
+    elif len(argv) > 2:
+        print(usage)
+    else:
+        for opt, arg in opts:
+            
+            if opt in ['-d','--default']:
+                if path.isfile(path.join(getcwd(),arg)):
+                    config.setDefault(arg[:-5])
+                    return
+                else:
+                    print(fileNotFound)
+                    config.invalidDefault(getcwd())
+                    return
+            
+            elif opt in ['-c','--config']:
+                if not path.isfile(path.join(getcwd(),arg)):
+                    print(fileNotFound)
+                    print('Please try again with a valid config file. Run with -h for more details')
+                    return
+                else:
+                    procs = config.loadConfig(arg[:-5])
+                    for proc in procs:
+                        proc.start()
+
+            elif opt in ['-h','--help']:
+                print(usage)
+                return
+
+            elif opt in ['-n','--new']:
+                config.newConfig()
+                return
+
 if __name__ == '__main__':
-    #if path,isf'default.config'
-    #    os.path.r
-    #except NotA
-    config.newConfig()
-    print("--===-=-=-=-=-==-")
-    procs = config.loadConfig('123')
-    for proc in procs:
-        proc.start()
+    main()
