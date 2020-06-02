@@ -7,6 +7,9 @@ from menu import Menu
 global defaultPath
 defaultPath = os.path.join(os.getcwd(),'default.config')
 
+def back():
+    return
+
 def yesNo(text):
     hold = 0
     while hold == 0:
@@ -63,54 +66,96 @@ def saveConf(confList):
             else:
                 print("Invalid Option")
 
-def editConf(confList):
-    
+def duration(toChange):
     while True:
         try:
-            confList[0] = int(input('Timer Duration (mins): '))
+            toChange = int(input('Timer Duration (mins): '))
             break
         except ValueError:
             print('Please Enter an Interger')
 
+def cdm(toChange):
     print('\nCount Down Module:')
-    confList[1] = yesNo('Active')
-    
+    toChange = yesNo('Active')
+
+def ldm_menu(confList):
+    menu = Menu(['Activate', 'Set Bar Length', 'Back'], [lbm_activate, lbm_length, back],[[confList[2]], [confList[3]],[]])
+
+    while True:
+        try:
+            inputChoice = int(input('\n'+str(menu)))
+        except ValueError:
+            print('Please Enter an Interger')
+        except IndexError:
+            print('Please Enter a Valid Option')
+        menu.choice(inputChoice)
+        if (inputChoice == 3):
+            break
+
+def lbm_activate(toChange):
     print('\nLoading Bar Module:')
-    confList[2] = yesNo('Active')
+    toChange = yesNo('Active')
 
-    if confList[2] == True:
-        while True:
-            try:
-                confList[3] = int(input('Loading Bar Length: '))
-                break
-            except ValueError:
-                print('Please Enter an Interger')
-            except IndexError:
-                print('Please Enter a Valid Option')
-    else:
-        pass
-    
+def lbm_length(toChange):
+    while True:
+        try:
+            toChange = int(input('Loading Bar Length: '))
+            break
+        except ValueError:
+            print('Please Enter an Interger')
+
+def pcm(toChange):
     print('\nPercenatge Module:')
-    confList[4] = yesNo('Active')
+    toChange = yesNo('Active')
 
+def txtm_menu(confList):
+    menu = Menu(['Activate', 'Set Items', 'Back'], [txtm_activate, txtm_items, back],[[confList[5]], [confList], []])
+
+    while True:
+        try:
+            inputChoice = int(input('\n'+str(menu)))
+        except ValueError:
+            print('Please Enter an Interger')
+        except IndexError:
+            print('Please Enter a Valid Option')
+        menu.choice(inputChoice)
+        if (inputChoice == 3):
+            break
+
+def txtm_activate(toChange):
     print('\nText Module:')
-    confList[5] = yesNo('Active')
+    toChange = yesNo('Active')
 
-    if confList[5] == True:
-        confList[7] = []
-        while True:
-            try:
-                confList[6] = int(input('Number of Text Items: '))
-                break
-            except ValueError:
-                print('Please Enter an Interger')
-            except IndexError:
-                print('Please Enter a Valid Option')       
+def txtm_items(confList):
+    confList[7] = []
+    while True:
+        try:
+            confList[6] = int(input('Number of Text Items: '))
+            break
+        except ValueError:
+            print('Please Enter an Interger')
+        except IndexError:
+            print('Please Enter a Valid Option')       
 
-        for i in range(confList[6]):
-            confList[7].append(input('Message '+str(i)+': '))
+    for i in range(confList[6]):
+        confList[7].append(input('Message '+str(i)+': '))
     else:
         pass
+
+def editConf(confList):
+    
+    changes = Menu(['Duration', 'Count Down Module', 'Loading Bar Module', 'Percentage Module', 'Text Modules', 'Exit'],[duration, cdm, ldm_menu, pcm, txtm_menu, cancel],[[confList[0]], [confList[1]], [confList], [confList[4]], [confList], []])
+
+    while True:
+        try:
+            inputChoice = int(input('\n'+str(changes)))
+        except ValueError:
+            print('Please Enter an Interger')
+        except IndexError:
+            print('Please Enter a Valid Option')
+        changes.choice(inputChoice)
+        if (inputChoice == 6):
+            break
 
 def viewConf(confVals):
     print('\n==Current Configuration==')
