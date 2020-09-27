@@ -39,7 +39,6 @@ for i in range(res_y):
         pos_top = div*j
         pos_end = pos_top+div
         Lavg = int(cv2.mean(img[y:yplus, pos_top:pos_end])[0])
-        img = cv2.rectangle(img,(pos_top,y),(pos_end,yplus),(0,0,255),2)
         print(chars[int(Lavg*.25)], end=" ")
     print("")
 
